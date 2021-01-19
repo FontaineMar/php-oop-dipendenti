@@ -8,16 +8,14 @@
       $this->cognome = $cognome;
       $this->codice_fiscale = $codice_fiscale;
     }
-    function to_string(){
-      echo 'nome: ' . $this->nome . '<br>';
-      echo 'cognome: ' . $this->cognome . '<br>';
-      echo 'CF: '. $this->codice_fiscale;
-    }
   }
 
   class Impiegato extends Persona{
     public $cod_impiegato;
     public function __construct($nome,$cognome,$codice_fiscale,$cod_impiegato){
+      if ((is_int($nome) || is_int($cognome)) || !is_int($cod_impiegato)) {
+        throw new Exception('dati inseriti non corretti');
+      }
       parent:: __construct($nome,$cognome,$codice_fiscale);
       $this->cod_impiegato = $cod_impiegato;
     }
@@ -27,6 +25,9 @@
     public function to_string(){
       echo 'codice Impiegato: ' . $this->cod_impiegato . '<br>';
       echo 'compenso: ' . $this->calc_salary() . '<br>';
+      echo 'nome: ' . $this->nome . '<br>';
+      echo 'cognome: ' . $this->cognome . '<br>';
+      echo 'CF: '. $this->codice_fiscale;
     }
   }
 
@@ -42,7 +43,6 @@
       return $this->work_day * $this->salary_day;
     }
   }
-
   class ImpiegatoAOre extends impiegato{
     public $work_hours;
     public $salary_hours;
@@ -72,5 +72,6 @@
       return $this->$project_salary;
     }
   }
-
+  $impiegato = new ImpiegatoSalariato(50,30,'carlo','bebo','dcbaucbaucabuubb',99999);
+  $impiegato->to_string();
  ?>
