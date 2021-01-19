@@ -72,6 +72,11 @@
       return $this->$project_salary;
     }
   }
-  $impiegato = new ImpiegatoSalariato(50,30,'carlo','bebo','dcbaucbaucabuubb',99999);
+
+try{
+  $impiegato = new ImpiegatoSalariato(50,30,'Carlo','bebo','dcbaucbaucabuubb',99999);
+} catch (Exception $e){
+echo 'dati inseriti non corretti ricontrollare...';
+}
   $impiegato->to_string();
  ?>
